@@ -75,29 +75,24 @@ p6=sum([math.exp(C.walk_probability(w[:1]+w[1+h:len(w)])) for w in walks for h i
 
 
 # Mean First Passage Times
-'''
-# S -> I
-print(np.mean([len(C.walk(10**7,"S","I"))-1 for i in range(10**6)]))
+
+# S -> I (~99 ~100)
+print(np.mean([len(C.walk(10**5,'S','I'))-1 for i in range(10**4)]))
 # I -> R
-print(np.mean([len(C.walk(10**7,"S","I"))-1 for i in range(10**6)]))
+#print(np.mean([len(C.walk(10**5,'I','R'))-1 for i in range(10**4)]))
 # I -> H
-print(np.mean([len(C.walk(10**7,"S","I"))-1 for i in range(10**6)]))
+#print(np.mean([len(C.walk(10**5,'I','R'))-1 for i in range(10**4)]))
 # I -> U
-print(np.mean([len(C.walk(10**7,"S","I"))-1 for i in range(10**6)]))
+#print(np.mean([len(C.walk(10**5,'I','U'))-1 for i in range(10**4)]))
 # H -> I
-print(np.mean([len(C.walk(10**7,"S","I"))-1 for i in range(10**6)]))
+#print(np.mean([len(C.walk(10**5,'H','I'))-1 for i in range(10**4)]))
 # H -> U
-print(np.mean([len(C.walk(10**7,"S","I"))-1 for i in range(10**6)]))
+#print(np.mean([len(C.walk(10**5,'H','I'))-1 for i in range(10**4)]))
 # U -> O
-print(np.mean([len(C.walk(10**7,"S","I"))-1 for i in range(10**6)]))
-'''
+#print(np.mean([len(C.walk(10**5,'U','O'))-1 for i in range(10**4)]))
 
 
-# Distribuição de equilibrio (não está a funcionar -> )
-'''
-/usr/local/lib/python3.9/site-packages/scipy/sparse/linalg/dsolve/linsolve.py:206: MatrixRankWarning: Matrix is exactly singular
-  warn("Matrix is exactly singular", MatrixRankWarning)
-  
-returned -> Vector()
-'''
-#print(C.steady())
+# Distribuição Estacionária
+states = [pykov.Vector(S=1), pykov.Vector(S=1), pykov.Vector(I=1), pykov.Vector(H=1), pykov.Vector(U=1), pykov.Vector(O=1), pykov.Vector(R=1)]
+steady = [C.pow(init, 10**4) for init in states]
+
