@@ -77,20 +77,25 @@ print('p1 {}\np2 {}\np3 {}\np4 {}\np5 {}\np6 {}\n'.format(round(p1,2),round(p2,2
 days=10**4
 times=10**5
 
+def mfpt(days, f_state, l_state, times):
+	return np.mean([len(C.walk(days, f_state, l_state))-1 for i in range(times)])
+
+
 # S -> I (~99 ~101)
-print('MFPG (S->I) {}'.format(round(np.mean([len(C.walk(days,'S','I'))-1 for i in range(times)]))))
+print('MFPG (S->I) {}'.format(round(mfpt(days, 'S', 'I', times))))
 # I -> R
-#print(np.mean([len(C.walk(steps,'I','R'))-1 for i in range(times)]))
+#print('MFPG (S->I) {}'.format(round(mfpt(days, 'I', 'R', times))))
 # I -> H
-#print(np.mean([len(C.walk(steps,'I','R'))-1 for i in range(times)]))
+#print('MFPG (S->I) {}'.format(round(mfpt(days, 'I', 'H', times))))
 # I -> U
-#print(np.mean([len(C.walk(steps,'I','U'))-1 for i in range(times)]))
+#print('MFPG (S->I) {}'.format(round(mfpt(days, 'I', 'U', times))))
 # H -> I
-#print(np.mean([len(C.walk(steps,'H','I'))-1 for i in range(times)]))
+#print('MFPG (H->I) {}'.format(round(mfpt(days, 'H', 'I', times))))
 # H -> U
-#print(np.mean([len(C.walk(steps,'H','I'))-1 for i in range(times)]))
+#print('MFPG (H->U) {}'.format(round(mfpt(days, 'H', 'U', times))))
 # U -> O
-#print(np.mean([len(C.walk(steps,'U','O'))-1 for i in range(times)]))
+#print('MFPG (U->O) {}'.format(round(mfpt(days, 'U', 'O', times))))
+
 
 
 # Distribuição Estacionária
