@@ -75,7 +75,7 @@ print('p1 {}\np2 {}\np3 {}\np4 {}\np5 {}\np6 {}\n'.format(round(p1,2),round(p2,2
 # Mean First Passage Times
 
 days=10**4
-times=10**5
+times=10**4
 
 def mfpt(days, f_state, l_state, times):
 	return np.mean([len(C.walk(days, f_state, l_state))-1 for i in range(times)])
@@ -84,17 +84,25 @@ def mfpt(days, f_state, l_state, times):
 # S -> I (~99 ~101)
 print('MFPG (S->I) {}'.format(round(mfpt(days, 'S', 'I', times))))
 # I -> R
-#print('MFPG (S->I) {}'.format(round(mfpt(days, 'I', 'R', times))))
+print('MFPG (I->R) {}'.format(round(mfpt(days, 'I', 'R', times))))
 # I -> H
-#print('MFPG (S->I) {}'.format(round(mfpt(days, 'I', 'H', times))))
+print('MFPG (I->H) {}'.format(round(mfpt(days, 'I', 'H', times))))
 # I -> U
-#print('MFPG (S->I) {}'.format(round(mfpt(days, 'I', 'U', times))))
+print('MFPG (I->U) {}'.format(round(mfpt(days, 'I', 'U', times))))
+# I -> O
+print('MFPG (I->O) {}'.format(round(mfpt(days, 'I', 'O', times))))
 # H -> I
-#print('MFPG (H->I) {}'.format(round(mfpt(days, 'H', 'I', times))))
+print('MFPG (H->I) {}'.format(round(mfpt(days, 'H', 'I', times))))
 # H -> U
-#print('MFPG (H->U) {}'.format(round(mfpt(days, 'H', 'U', times))))
+print('MFPG (H->U) {}'.format(round(mfpt(days, 'H', 'U', times))))
+# H -> O
+print('MFPG (H->U) {}'.format(round(mfpt(days, 'H', 'O', times))))
+# H -> R
+print('MFPG (H->R) {}'.format(round(mfpt(days, 'H', 'R', times))))
 # U -> O
-#print('MFPG (U->O) {}'.format(round(mfpt(days, 'U', 'O', times))))
+print('MFPG (U->O) {}'.format(round(mfpt(days, 'U', 'O', times))))
+# U -> R
+print('MFPG (U->R) {}'.format(round(mfpt(days, 'U', 'R', times))))
 
 
 
