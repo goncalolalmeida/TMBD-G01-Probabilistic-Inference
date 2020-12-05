@@ -10,8 +10,8 @@ o = [0.00,0.00,0.00,0.00,1.00,0.00]
 r = [0.00,0.00,0.00,0.00,0.00,1.00]
 
 a = np.array([s,i,h,u,o,r])
-states = ['S','I','H','U','O','R']
-states = dict(zip(list(range(1,len(a)+1)), states))
+str_states = ['S','I','H','U','O','R']
+states = dict(zip(list(range(1,len(a)+1)), str_states))
 dic = { (states[i+1], states[j+1]):a[i][j] for i in range(len(a)) for j in range(len(a[i])) }
 M = pykov.Matrix( dic )
 print(M, end='\n\n')
@@ -55,8 +55,8 @@ p2=math.exp(C.walk_probability(walk))
 
 # Prob ( um infetado recuperar entre o Nº e o (N+M)º dia sem ser hospitalizado )
 m=4
-walk[1:1] = ['I']*4
-p3=sum( [math.exp(C.walk_probability(walk[i:])) for i in range(5)] )
+walk[1:1] = ['I']*m
+p3=sum( [math.exp(C.walk_probability(walk[i:])) for i in range(m+1)] )
 
 # Prob ( um infetado passar menos de N dias (seguintes) hospitalizado)
 n=5
@@ -76,7 +76,7 @@ p6=sum([math.exp(C.walk_probability(w[:1]+w[1+h:len(w)])) for w in walks for h i
 
 # Mean First Passage Times
 
-# S -> I (~99 ~100)
+# S -> I (~99 ~101)
 print(np.mean([len(C.walk(10**5,'S','I'))-1 for i in range(10**4)]))
 # I -> R
 #print(np.mean([len(C.walk(10**5,'I','R'))-1 for i in range(10**4)]))
@@ -93,6 +93,6 @@ print(np.mean([len(C.walk(10**5,'S','I'))-1 for i in range(10**4)]))
 
 
 # Distribuição Estacionária
-states = [pykov.Vector(S=1), pykov.Vector(S=1), pykov.Vector(I=1), pykov.Vector(H=1), pykov.Vector(U=1), pykov.Vector(O=1), pykov.Vector(R=1)]
-steady = [C.pow(init, 10**4) for init in states]
+v_states = [pykov.Vector(S=1), pykov.Vector(I=1), pykov.Vector(H=1), pykov.Vector(U=1), pykov.Vector(O=1), pykov.Vector(R=1)]
+steady = dict(zip(str_states, [C.pow(init, 10**4) for init in v_states]))
 
