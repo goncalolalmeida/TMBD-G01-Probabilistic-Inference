@@ -51,10 +51,22 @@ p1=math.exp(C.walk_probability(walk))
 walk = ['I']*n + ['R']
 p2=math.exp(C.walk_probability(walk))
 
+
+# Prob ( um infetado recuperar antes do Nº dia sem ser hospitalizado )
+p3=sum( [math.exp(C.walk_probability(walk[i:])) for i in range(len(walk)-1)] )
+
+'''
 # Prob ( um infetado recuperar entre o Nº e o (N+M)º dia sem ser hospitalizado )
 m=4
 walk[1:1] = ['I']*m
 p3=sum( [math.exp(C.walk_probability(walk[i:])) for i in range(m+1)] )
+'''
+'''
+wa=['I']*14+['R']
+print(sum( [math.exp(C.walk_probability(wa[i:])) for i in range(5)] ))
+wa=['I']*5+['R']
+print(sum( [math.exp(C.walk_probability(wa[i:])) for i in range(5)] ))
+'''
 
 # Prob ( um infetado passar menos de N dias (seguintes) hospitalizado)
 walk = ['I'] + ['H']*n
@@ -77,12 +89,14 @@ print('p1 {}\np2 {}\np3 {}\np4 {}\np5 {}\np6 {}\n'.format(round(p1,2),round(p2,2
 days=10**4
 times=10**4
 
+
 def mfpt(days, f_state, l_state, times):
-	return np.mean([len(C.walk(days, f_state, l_state))-1 for i in range(times)])
+	return np.mean([len(C.walk(days, f_state, l_state))-1  for i in range(times)])
 
 
 # S -> I (~99 ~101)
 print('MFPG (S->I) {}'.format(round(mfpt(days, 'S', 'I', times))))
+'''
 # I -> R
 print('MFPG (I->R) {}'.format(round(mfpt(days, 'I', 'R', times))))
 # I -> H
@@ -103,6 +117,7 @@ print('MFPG (H->R) {}'.format(round(mfpt(days, 'H', 'R', times))))
 print('MFPG (U->O) {}'.format(round(mfpt(days, 'U', 'O', times))))
 # U -> R
 print('MFPG (U->R) {}'.format(round(mfpt(days, 'U', 'R', times))))
+'''
 
 
 
