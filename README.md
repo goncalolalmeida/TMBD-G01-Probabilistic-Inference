@@ -1,1 +1,1 @@
-# TMBD-G01-Veracity
+# TMBD-G01-Probabilistic-Inference
